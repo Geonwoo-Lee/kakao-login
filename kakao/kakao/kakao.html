@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="javascript:kakaoLogin()"><img src="https://asp.pointpark.com/PlusPointMember/resources/images/mobileHomePage/btn_kakao.png"></a>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+    <script>
+        //1cf96e561594ec0b9d5e6b426abe0528
+        window.Kakao.init("1c33162594ec00e43b22fc5b66b276a2")
+        function kakaoLogin(){
+            window.Kakao.Auth.login({
+                scope:'profile_nickname, account_email, gender',
+                success: function(authObj){
+                    window.Kakao.API.request(
+                        {
+                            url:'/v2/user/me',
+                            sucess: res => {
+                                const kakao_account = res.kakao_account
+                            }
+                        }
+                    )
+                }
+            })
+        }
+    </script>
+</body>
+</html>
